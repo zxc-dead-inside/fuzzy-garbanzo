@@ -1,0 +1,8 @@
+<h1>{{ title }}</h1>
+<ul>
+  {% for category in categories %}
+    {% include "catalog/_category_node.html" with category=category %}
+  {% empty %}
+    <li>Нет категорий</li>
+  {% endfor %}
+</ul>
