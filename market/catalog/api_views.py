@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .models import Category
-from .serializers import CategorySerializer
+from .models import Category, Product
+from .serializers import CategorySerializer, ProductSerializer
 
 
 class CategoryListAPIView(generics.ListAPIView):
@@ -16,4 +16,21 @@ class CategoryDetailAPIView(generics.RetrieveAPIView):
     queryset = Category.objects.filter(
         is_active=True).prefetch_related('children')
     serializer_class = CategorySerializer
+    lookup_field = 'id'
+
+
+class ProductListAPIView(generics.ListAPIView):
+    """API: List of active products"""
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        return Product.objects.filter(
+            is_active=True).select_related('category')
+
+
+class ProductDetailAPIView(generics.RetrieveAPIView):
+    """API: Product detail by ID"""
+    queryset = Product.objects.filter(
+        is_active=True).select_related('category')
+    serializer_class = ProductSerializer
     lookup_field = 'id'

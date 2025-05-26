@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 
-from .models import Category
+from .models import Category, Product
 
 
 class CategoryListView(ListView):
@@ -85,3 +85,39 @@ def category_json_detail(request, category_id):
     }
 
     return JsonResponse(data)
+
+
+class ProductListView(ListView):
+    """List of products"""
+    model = Product
+    template_name = 'catalog/product_list.html'
+    context_object_name = 'products'
+    paginate_by = 12
+
+    def get_queryset(self):
+        return Product.objects.filter(is_active=True).select_related(
+            'category')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Products'
+        return context
+
+
+class ProductDetailView(DetailView):
+    """Product detail page"""
+    model = Product
+    template_name = 'catalog/product_detail.html'
+    context_object_name = 'product'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+
+    def get_queryset(self):
+        return Product.objects.filter(is_active=True).select_related(
+            'category')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = self.get_object()
+        context['title'] = product.name
+        return context
