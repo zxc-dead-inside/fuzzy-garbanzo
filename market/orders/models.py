@@ -37,6 +37,8 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField('Quantity', default=1)
     price = models.DecimalField('Price', max_digits=10,
                                 decimal_places=2, blank=True)
+    promo_price = models.DecimalField('Promo Price', max_digits=10,
+                                      decimal_places=2, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Product in order'
@@ -52,6 +54,7 @@ class OrderItem(models.Model):
 
     @property
     def total_price(self):
-        if self.price is None or self.quantity is None:
+        price = self.promo_price if self.promo_price is not None else self.price
+        if price is None or self.quantity is None:
             return 0
-        return self.quantity * self.price
+        return self.quantity * price
