@@ -35,7 +35,8 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.PROTECT,
                                 verbose_name='Product')
     quantity = models.PositiveIntegerField('Quantity', default=1)
-    price = models.DecimalField('Price', max_digits=10, decimal_places=2)
+    price = models.DecimalField('Price', max_digits=10,
+                                decimal_places=2, blank=True)
 
     class Meta:
         verbose_name = 'Product in order'
@@ -44,6 +45,13 @@ class OrderItem(models.Model):
     def __str__(self):
         return f'{self.product.name} x{self.quantity}'
 
+    def save(self, *args, **kwargs):
+        if self.product and self.price is None:
+            self.price = self.product.price
+        super().save(*args, **kwargs)
+
     @property
     def total_price(self):
+        if self.price is None or self.quantity is None:
+            return 0
         return self.quantity * self.price
