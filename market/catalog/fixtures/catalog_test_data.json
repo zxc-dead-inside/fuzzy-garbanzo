@@ -1,0 +1,378 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Электроника",
+      "slug": "elektronika",
+      "parent": null,
+      "description": "Современная электроника и гаджеты для дома и офиса",
+      "image": "",
+      "is_active": true,
+      "sort_order": 10,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Смартфоны и телефоны",
+      "slug": "smartfony-i-telefony",
+      "parent": 1,
+      "description": "Мобильные телефоны и аксессуары к ним",
+      "image": "",
+      "is_active": true,
+      "sort_order": 10,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "iPhone",
+      "slug": "iphone",
+      "parent": 2,
+      "description": "Смартфоны Apple iPhone всех поколений",
+      "image": "",
+      "is_active": true,
+      "sort_order": 10,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+      "name": "Samsung Galaxy",
+      "slug": "samsung-galaxy",
+      "parent": 2,
+      "description": "Смартфоны Samsung Galaxy серии",
+      "image": "",
+      "is_active": true,
+      "sort_order": 20,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+      "name": "Xiaomi",
+      "slug": "xiaomi",
+      "parent": 2,
+      "description": "Смартфоны Xiaomi, Redmi и POCO",
+      "image": "",
+      "is_active": true,
+      "sort_order": 30,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+      "name": "Аксессуары для телефонов",
+      "slug": "aksessuary-dlya-telefonov",
+      "parent": 2,
+      "description": "Чехлы, защитные стекла, зарядные устройства",
+      "image": "",
+      "is_active": true,
+      "sort_order": 40,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 7,
+    "fields": {
+      "name": "Компьютеры и ноутбуки",
+      "slug": "kompyutery-i-noutbuki",
+      "parent": 1,
+      "description": "Персональные компьютеры и комплектующие",
+      "image": "",
+      "is_active": true,
+      "sort_order": 20,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 8,
+    "fields": {
+      "name": "Ноутбуки",
+      "slug": "noutbuki",
+      "parent": 7,
+      "description": "Портативные компьютеры для работы и игр",
+      "image": "",
+      "is_active": true,
+      "sort_order": 10,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 9,
+    "fields": {
+      "name": "Настольные ПК",
+      "slug": "nastolnye-pk",
+      "parent": 7,
+      "description": "Стационарные компьютеры и моноблоки",
+      "image": "",
+      "is_active": true,
+      "sort_order": 20,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 10,
+    "fields": {
+      "name": "Комплектующие",
+      "slug": "komplektuyushchie",
+      "parent": 7,
+      "description": "Процессоры, видеокарты, материнские платы",
+      "image": "",
+      "is_active": true,
+      "sort_order": 30,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 11,
+    "fields": {
+      "name": "Телевизоры и аудио",
+      "slug": "televizory-i-audio",
+      "parent": 1,
+      "description": "ТВ техника и аудиооборудование",
+      "image": "",
+      "is_active": true,
+      "sort_order": 30,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 12,
+    "fields": {
+      "name": "Телевизоры",
+      "slug": "televizory",
+      "parent": 11,
+      "description": "Smart TV, OLED, QLED телевизоры",
+      "image": "",
+      "is_active": true,
+      "sort_order": 10,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 13,
+    "fields": {
+      "name": "Наушники",
+      "slug": "naushniki",
+      "parent": 11,
+      "description": "Проводные и беспроводные наушники",
+      "image": "",
+      "is_active": true,
+      "sort_order": 20,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 14,
+    "fields": {
+      "name": "Колонки",
+      "slug": "kolonki",
+      "parent": 11,
+      "description": "Портативные и домашние акустические системы",
+      "image": "",
+      "is_active": true,
+      "sort_order": 30,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 15,
+    "fields": {
+      "name": "Одежда и обувь",
+      "slug": "odezhda-i-obuv",
+      "parent": null,
+      "description": "Мужская, женская и детская одежда",
+      "image": "",
+      "is_active": true,
+      "sort_order": 20,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 16,
+    "fields": {
+      "name": "Мужская одежда",
+      "slug": "muzhskaya-odezhda",
+      "parent": 15,
+      "description": "Одежда для мужчин всех возрастов",
+      "image": "",
+      "is_active": true,
+      "sort_order": 10,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 17,
+    "fields": {
+      "name": "Рубашки",
+      "slug": "rubashki",
+      "parent": 16,
+      "description": "Деловые и повседневные рубашки",
+      "image": "",
+      "is_active": true,
+      "sort_order": 10,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 18,
+    "fields": {
+      "name": "Брюки",
+      "slug": "bryuki",
+      "parent": 16,
+      "description": "Классические и спортивные брюки",
+      "image": "",
+      "is_active": true,
+      "sort_order": 20,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 19,
+    "fields": {
+      "name": "Куртки",
+      "slug": "kurtki",
+      "parent": 16,
+      "description": "Верхняя одежда для мужчин",
+      "image": "",
+      "is_active": true,
+      "sort_order": 30,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 20,
+    "fields": {
+      "name": "Женская одежда",
+      "slug": "zhenskaya-odezhda",
+      "parent": 15,
+      "description": "Одежда для женщин всех возрастов",
+      "image": "",
+      "is_active": true,
+      "sort_order": 20,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 21,
+    "fields": {
+      "name": "Платья",
+      "slug": "platya",
+      "parent": 20,
+      "description": "Повседневные и вечерние платья",
+      "image": "",
+      "is_active": true,
+      "sort_order": 10,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 22,
+    "fields": {
+      "name": "Блузки",
+      "slug": "bluzki",
+      "parent": 20,
+      "description": "Деловые и повседневные блузки",
+      "image": "",
+      "is_active": true,
+      "sort_order": 20,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 23,
+    "fields": {
+      "name": "Юбки",
+      "slug": "yubki",
+      "parent": 20,
+      "description": "Юбки различных фасонов",
+      "image": "",
+      "is_active": true,
+      "sort_order": 30,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 24,
+    "fields": {
+      "name": "Обувь",
+      "slug": "obuv",
+      "parent": 15,
+      "description": "Мужская и женская обувь",
+      "image": "",
+      "is_active": true,
+      "sort_order": 30,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 25,
+    "fields": {
+      "name": "Кроссовки",
+      "slug": "krossovki",
+      "parent": 24,
+      "description": "Спортивная и повседневная обувь",
+      "image": "",
+      "is_active": true,
+      "sort_order": 10,
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z"
+    }
+  }
+]
+

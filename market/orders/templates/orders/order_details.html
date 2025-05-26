@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Заказ #{{ order.pk }}</h1>
+<p>Статус: {{ order.status }}</p>
+<p>Создан: {{ order.created_at }}</p>
+<p>Итоговая сумма: {{ order.total_sum }} ₽</p>
+
+<h3>Товары:</h3>
+<ul>
+  {% for item in order.items.all %}
+    <li>
+      {{ item.product.name }} — {{ item.quantity }} шт — {{ item.total_price }} ₽
+    </li>
+  {% empty %}
+    <li>Нет товаров</li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,158 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Electronics",
+      "slug": "electronics",
+      "parent": null,
+      "description": "Electronic devices and gadgets",
+      "image": "categories/electronics.jpg",
+      "is_active": true,
+      "sort_order": 1,
+      "created_at": "2025-05-26T11:05:29+00:00",
+      "updated_at": "2025-05-26T11:05:29+00:00"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Smartphones",
+      "slug": "smartphones",
+      "parent": 1,
+      "description": "Mobile phones and accessories",
+      "image": "categories/smartphones.jpg",
+      "is_active": true,
+      "sort_order": 1,
+      "created_at": "2025-05-26T11:05:29+00:00",
+      "updated_at": "2025-05-26T11:05:29+00:00"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Laptops",
+      "slug": "laptops",
+      "parent": 1,
+      "description": "Portable computers",
+      "image": "categories/laptops.jpg",
+      "is_active": true,
+      "sort_order": 2,
+      "created_at": "2025-05-26T11:05:29+00:00",
+      "updated_at": "2025-05-26T11:05:29+00:00"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+      "name": "Home Appliances",
+      "slug": "home-appliances",
+      "parent": null,
+      "description": "Appliances for your home",
+      "image": "categories/home-appliances.jpg",
+      "is_active": true,
+      "sort_order": 2,
+      "created_at": "2025-05-26T11:05:29+00:00",
+      "updated_at": "2025-05-26T11:05:29+00:00"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "iPhone 15 Pro",
+      "slug": "iphone-15-pro",
+      "category": 2,
+      "description": "The latest iPhone with advanced features and powerful performance.",
+      "price": "1299.99",
+      "image": "products/iphone15pro.jpg",
+      "spec_file": "products/specs/iphone15pro_specs.pdf",
+      "is_active": true,
+      "created_at": "2025-05-26T11:05:29+00:00",
+      "updated_at": "2025-05-26T11:05:29+00:00"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Samsung Galaxy S25",
+      "slug": "samsung-galaxy-s25",
+      "category": 2,
+      "description": "Flagship Android smartphone with cutting-edge technology.",
+      "price": "1199.99",
+      "image": "products/galaxys25.jpg",
+      "spec_file": "products/specs/galaxys25_specs.pdf",
+      "is_active": true,
+      "created_at": "2025-05-26T11:05:29+00:00",
+      "updated_at": "2025-05-26T11:05:29+00:00"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "MacBook Pro 16",
+      "slug": "macbook-pro-16",
+      "category": 3,
+      "description": "Powerful laptop for professionals with stunning display and long battery life.",
+      "price": "2499.99",
+      "image": "products/macbookpro16.jpg",
+      "spec_file": "products/specs/macbookpro16_specs.pdf",
+      "is_active": true,
+      "created_at": "2025-05-26T11:05:29+00:00",
+      "updated_at": "2025-05-26T11:05:29+00:00"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "Dell XPS 15",
+      "slug": "dell-xps-15",
+      "category": 3,
+      "description": "Premium Windows laptop with InfinityEdge display and high performance.",
+      "price": "1899.99",
+      "image": "products/dellxps15.jpg",
+      "spec_file": "products/specs/dellxps15_specs.pdf",
+      "is_active": true,
+      "created_at": "2025-05-26T11:05:29+00:00",
+      "updated_at": "2025-05-26T11:05:29+00:00"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "Smart Refrigerator",
+      "slug": "smart-refrigerator",
+      "category": 4,
+      "description": "Connected refrigerator with touch screen and smart features.",
+      "price": "2999.99",
+      "image": "products/smartfridge.jpg",
+      "spec_file": "products/specs/smartfridge_specs.pdf",
+      "is_active": true,
+      "created_at": "2025-05-26T11:05:29+00:00",
+      "updated_at": "2025-05-26T11:05:29+00:00"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "name": "Robot Vacuum Cleaner",
+      "slug": "robot-vacuum",
+      "category": 4,
+      "description": "Autonomous vacuum cleaner with smart mapping and scheduling.",
+      "price": "499.99",
+      "image": "products/robotvacuum.jpg",
+      "spec_file": "products/specs/robotvacuum_specs.pdf",
+      "is_active": true,
+      "created_at": "2025-05-26T11:05:29+00:00",
+      "updated_at": "2025-05-26T11:05:29+00:00"
+    }
+  }
+]

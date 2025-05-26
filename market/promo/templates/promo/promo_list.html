@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Акции</h1>
+
+{% if promos %}
+  <ul>
+    {% for promo in promos %}
+      <li>
+        <a href="{% url 'promo:promo_detail' promo.pk %}">
+          {{ promo.name }}
+        </a>
+        {% if promo.discount_percent %}
+          — Скидка {{ promo.discount_percent }}%
+        {% elif promo.promo_type == 'n_for_m' %}
+          — Купи {{ promo.n }} — плати {{ promo.m }}
+        {% elif promo.fixed_price %}
+          — Фиксированная цена {{ promo.fixed_price }} ₽
+        {% endif %}
+        <br>
+        {{ promo.description|default:"Описание отсутствует" }}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Нет активных акций.</p>
+{% endif %}
+{% endblock %}
