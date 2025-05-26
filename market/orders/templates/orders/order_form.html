@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Создать заказ</h1>
+
+  <form method="post" id="order-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    {{ formset.management_form }}
+
+    <div id="formset-container">
+      {% for form in formset %}
+        <div class="order-item-form">
+          {{ form.as_p }}
+        </div>
+      {% endfor %}
+    </div>
+
+    <button type="button" id="add-item">Добавить товар</button>
+    <button type="submit">Сохранить заказ</button>
+  </form>
+
+  <script>
+    document.getElementById('add-item').addEventListener('click', function() {
+      const container = document.getElementById('formset-container');
+      const totalForms = document.getElementById('id_items-TOTAL_FORMS');
+      const currentFormCount = parseInt(totalForms.value);
+      const firstForm = container.children[0];
+      const newForm = firstForm.cloneNode(true);
+
+      newForm.querySelectorAll('input, select, textarea').forEach(input => {
+        const name = input.getAttribute('name').replace(/\d+/, currentFormCount);
+        const id = input.getAttribute('id').replace(/\d+/, currentFormCount);
+        input.setAttribute('name', name);
+        input.setAttribute('id', id);
+
+        if (input.type !== 'hidden') {
+          input.value = '';
+          if (input.type === 'checkbox' || input.type === 'radio') {
+            input.checked = false;
+          }
+        }
+      });
+
+      container.appendChild(newForm);
+      totalForms.value = currentFormCount + 1;
+    });
+  </script>
+{% endblock %}
