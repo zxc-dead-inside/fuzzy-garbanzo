@@ -96,3 +96,34 @@ class Category(models.Model):
             breadcrumbs.insert(0, current)
             current = current.parent
         return breadcrumbs
+
+
+class Product(models.Model):
+    """Catalog product"""
+    name = models.CharField('Name', max_length=255)
+    slug = models.SlugField('URL', unique=True)
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name='products',
+        verbose_name='Category'
+    )
+    description = models.TextField('Description', blank=True)
+    price = models.DecimalField('Price', max_digits=10, decimal_places=2)
+    image = models.ImageField('Image', upload_to='products/', blank=True)
+    spec_file = models.FileField('Specification',
+                                 upload_to='products/specs/', blank=True)
+    is_active = models.BooleanField('Active', default=True)
+    created_at = models.DateTimeField('Created at', auto_now_add=True)
+    updated_at = models.DateTimeField('Updated at', auto_now=True)
+
+    class Meta:
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('catalog:product_detail', kwargs={'slug': self.slug})
