@@ -28,6 +28,9 @@ urlpatterns = [
     path('api/catalog/', include('market.catalog.api_urls')),
     path("orders/", include("market.orders.urls", namespace="orders")),
     path("api/orders/", include("market.orders.api_urls")),
+    path('promo/', include('market.promo.urls', namespace='promo')),
+    path("api/promo/", include("market.promo.api_urls")),
+
 
     # Media files
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
