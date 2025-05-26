@@ -5,11 +5,11 @@ from market.catalog.models import Product
 
 class Order(models.Model):
     STATUS_CHOICES = [
-        ('draft', 'Черновик'),
-        ('confirmed', 'Подтверждён'),
-        ('shipped', 'Отправлен'),
-        ('completed', 'Завершён'),
-        ('cancelled', 'Отменён'),
+        ('draft', 'Draft'),
+        ('confirmed', 'Confirmed'),
+        ('shipped', 'Shipped'),
+        ('completed', 'Completed'),
+        ('cancelled', 'Cancelled'),
     ]
 
     status = models.CharField('Status', max_length=20,
