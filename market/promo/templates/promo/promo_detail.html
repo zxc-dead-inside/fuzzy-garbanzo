@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ promo.name }}</h1>
+
+<p>{{ promo.description|default:"Описание отсутствует" }}</p>
+
+{% if promo.discount_percent %}
+  <p>Скидка: {{ promo.discount_percent }}%</p>
+{% elif promo.promo_type == 'n_for_m' %}
+  <p>Акция: Купи {{ promo.n }}, заплати за {{ promo.m }}</p>
+{% elif promo.fixed_price %}
+  <p>Фиксированная цена: {{ promo.fixed_price }} ₽</p>
+{% endif %}
+
+<p>Акция активна: {{ promo.is_current|yesno:"Да,Нет" }}</p>
+<p>Период действия:
+  {% if promo.start_date %} с {{ promo.start_date }}{% endif %}
+  {% if promo.end_date %} по {{ promo.end_date }}{% endif %}
+</p>
+
+<h3>Товары в акции:</h3>
+<ul>
+  {% for product in promo.products.all %}
+    <li>
+      <a href="{{ product.get_absolute_url }}">
+        {{ product.name }}
+      </a>
+    </li>
+  {% empty %}
+    <li>Нет товаров</li>
+  {% endfor %}
+</ul>
+{% endblock %}
