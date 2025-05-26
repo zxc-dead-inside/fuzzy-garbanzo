@@ -90,7 +90,8 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "market.users",
     "market.catalog",
-    "market.orders"
+    "market.orders",
+    "market.promo",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
