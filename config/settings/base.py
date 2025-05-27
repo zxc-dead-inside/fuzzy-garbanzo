@@ -85,6 +85,8 @@ THIRD_PARTY_APPS = [
     "rest_framework.authtoken",
     "corsheaders",
     "drf_spectacular",
+    "imagekit",
+    "django_filters",
 ]
 
 LOCAL_APPS = [
