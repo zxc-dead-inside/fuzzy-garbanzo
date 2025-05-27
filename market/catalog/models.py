@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 
 class Category(models.Model):
@@ -116,6 +118,13 @@ class Product(models.Model):
     is_active = models.BooleanField('Active', default=True)
     created_at = models.DateTimeField('Created at', auto_now_add=True)
     updated_at = models.DateTimeField('Updated at', auto_now=True)
+
+    image_preview = ImageSpecField(
+        source='image',
+        processors=[ResizeToFill(100, 100)],
+        format='JPEG',
+        options={'quality': 70}
+    )
 
     class Meta:
         verbose_name = 'Product'

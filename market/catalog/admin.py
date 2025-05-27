@@ -38,12 +38,12 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['name', 'category', 'price', 'is_active',
-                    'image_preview', 'created_at']
+                    'admin_image_preview', 'created_at']
     list_filter = ['is_active', 'category', 'created_at']
     search_fields = ['name', 'description']
     prepopulated_fields = {'slug': ('name',)}
     list_editable = ['is_active', 'price']
-    readonly_fields = ['image_preview']
+    readonly_fields = ['admin_image_preview']
     ordering = ['name', 'price']
 
     fieldsets = (
@@ -51,16 +51,18 @@ class ProductAdmin(admin.ModelAdmin):
             'fields': ('name', 'slug', 'category', 'description', 'price')
         }),
         ('Media', {
-            'fields': ('image', 'image_preview', 'spec_file')
+            'fields': ('image', 'admin_image_preview', 'spec_file')
         }),
         ('Status', {
             'fields': ('is_active',)
         }),
     )
 
-    def image_preview(self, obj):
-        if obj.image:
-            return format_html('<img src="{}" style="max-height: 50px;"/>',
-                               obj.image.url)
+    def admin_image_preview(self, obj):
+        if obj.image_preview:
+            return format_html(
+                '<img src="{}" style="max-height: 50px;" />',
+                obj.image_preview.url
+            )
         return "—"
-    image_preview.short_description = 'Preview image'
+    admin_image_preview.short_description = 'Preview image'
