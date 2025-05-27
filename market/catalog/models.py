@@ -3,6 +3,8 @@ from django.urls import reverse
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
+from market.catalog.managers import ProductManager
+
 
 class Category(models.Model):
     """Hierarchical tree of catalog categories"""
@@ -125,6 +127,8 @@ class Product(models.Model):
         format='JPEG',
         options={'quality': 70}
     )
+
+    objects = ProductManager()
 
     class Meta:
         verbose_name = 'Product'

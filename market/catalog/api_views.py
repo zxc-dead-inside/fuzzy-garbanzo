@@ -1,6 +1,8 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from .models import Category, Product
 from .serializers import CategorySerializer, ProductSerializer
+from .filters import ProductFilter
 
 
 class CategoryListAPIView(generics.ListAPIView):
@@ -22,6 +24,8 @@ class CategoryDetailAPIView(generics.RetrieveAPIView):
 class ProductListAPIView(generics.ListAPIView):
     """API: List of active products"""
     serializer_class = ProductSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = ProductFilter
 
     def get_queryset(self):
         return Product.objects.filter(
