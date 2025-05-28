@@ -37,3 +37,6 @@ django-imagekit==5.0.0
 
 factory_boy~=3.3.2
 openpyxl~=3.1.5
+
+requests~=2.32.3
+tqdm~=4.67.1

@@ -1,6 +1,5 @@
 # ruff: noqa: ERA001, E501
 """Base settings to build other settings files upon."""
-
 import ssl
 from pathlib import Path
 
@@ -12,6 +11,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 APPS_DIR = BASE_DIR / "market"
 env = environ.Env()
 
+EXCHANGERATE_API_KEY = env("EXCHANGERATE_API_KEY")
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
 if READ_DOT_ENV_FILE:
     # OS environment variables take precedence over variables from .env
@@ -100,6 +100,7 @@ LOCAL_APPS = [
     "market.catalog",
     "market.orders",
     "market.promo",
+    "market.common",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
