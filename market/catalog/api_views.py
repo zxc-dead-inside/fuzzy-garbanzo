@@ -1,8 +1,12 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics
+from rest_framework import generics, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from .models import Category, Product
 from .serializers import CategorySerializer, ProductSerializer
 from .filters import ProductFilter
+from .tasks.export import generate_product_xls
 
 
 class CategoryListAPIView(generics.ListAPIView):
@@ -38,3 +42,11 @@ class ProductDetailAPIView(generics.RetrieveAPIView):
         is_active=True).select_related('category')
     serializer_class = ProductSerializer
     lookup_field = 'id'
+
+
+class ProductExportXLSAPIView(APIView):
+    """API: Trigers product export to Excel file"""
+
+    def post(self, request):
+        task = generate_product_xls.delay()
+        return Response({"task_id": task.id}, status=status.HTTP_202_ACCEPTED)
