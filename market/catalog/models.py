@@ -6,7 +6,24 @@ from imagekit.processors import ResizeToFill
 from market.catalog.managers import ProductManager
 
 
-class Category(models.Model):
+class TimeStampedMixin(models.Model):
+    """Add timestamps to the model"""
+    created_at = models.DateTimeField('Created at', auto_now_add=True)
+    updated_at = models.DateTimeField('Updated at', auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
+class ActivatableMixin(models.Model):
+    """Add a boolean field to indicate if the object is active"""
+    is_active = models.BooleanField('Active', default=True)
+
+    class Meta:
+        abstract = True
+
+
+class Category(TimeStampedMixin, ActivatableMixin, models.Model):
     """Hierarchical tree of catalog categories"""
     name = models.CharField('Name', max_length=200)
     slug = models.SlugField('URL', unique=True)
@@ -20,10 +37,8 @@ class Category(models.Model):
     )
     description = models.TextField('Description', blank=True)
     image = models.ImageField('Image', upload_to='categories/', blank=True)
-    is_active = models.BooleanField('Active', default=True)
     sort_order = models.PositiveIntegerField('Sort order', default=0)
-    created_at = models.DateTimeField('Created at', auto_now_add=True)
-    updated_at = models.DateTimeField('Updated at', auto_now=True)
+
 
     class Meta:
         verbose_name = 'Category'
@@ -102,7 +117,7 @@ class Category(models.Model):
         return breadcrumbs
 
 
-class Product(models.Model):
+class Product(TimeStampedMixin, ActivatableMixin, models.Model):
     """Catalog product"""
     name = models.CharField('Name', max_length=255)
     slug = models.SlugField('URL', unique=True)
@@ -117,9 +132,6 @@ class Product(models.Model):
     image = models.ImageField('Image', upload_to='products/', blank=True)
     spec_file = models.FileField('Specification',
                                  upload_to='products/specs/', blank=True)
-    is_active = models.BooleanField('Active', default=True)
-    created_at = models.DateTimeField('Created at', auto_now_add=True)
-    updated_at = models.DateTimeField('Updated at', auto_now=True)
 
     image_preview = ImageSpecField(
         source='image',
