@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.timezone import now
 
-
 class ProductQuerySet(models.QuerySet):
     def with_active_promos(self):
         today = now().date()
@@ -21,3 +20,10 @@ class ProductManager(models.Manager):
 
     def with_active_promos(self):
         return self.get_queryset().with_active_promos()
+
+    def best_in_category(self, category):
+        """Return the cheapest product in a given category."""""
+        return self.filter(
+            is_active=True,
+            category=category
+        ).order_by('price').first()
