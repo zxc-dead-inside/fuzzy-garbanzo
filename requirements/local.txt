@@ -34,6 +34,9 @@ django-extensions==4.1  # https://github.com/django-extensions/django-extensions
 django-coverage-plugin==3.1.0  # https://github.com/nedbat/django_coverage_plugin
 pytest-django==4.11.1  # https://github.com/pytest-dev/pytest-django
 django-imagekit==5.0.0
+django-elasticsearch-dsl==8.0
 
+# Tools
+elasticsearch==8.18.1
 factory_boy~=3.3.2
 openpyxl~=3.1.5

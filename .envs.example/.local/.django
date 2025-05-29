@@ -1,0 +1,18 @@
+# General
+# ------------------------------------------------------------------------------
+USE_DOCKER=yes
+IPYTHONDIR=/app/.ipython
+# Redis
+# ------------------------------------------------------------------------------
+REDIS_URL=redis://redis:6379/0
+
+# Celery
+# ------------------------------------------------------------------------------
+
+# Flower
+CELERY_FLOWER_USER=mKlZbuYRjXaTdGXQWybEkCgJIaQFaYZJ
+CELERY_FLOWER_PASSWORD=Wzk2f27sh6QZgy0zb4r4iOviyqnH0SP6iOBcGS0ST8kmq3MzkIWRWBpkit9FuIGI
+DATABASE_URL=postgres://AcSngpyLwtzkwZQUONjvFDgpiFuTqsRI:4QTlqhyRYWMnYsxHaXd0uEAZ0uAZcVQxTSpVVsgTTD1b5pFvjbQFSPaBsaImzdoo@postgres:5432/market
+
+# exchangerate
+EXCHANGERATE_API_KEY = "2a19b283a6cb7f3b0e123b3f"

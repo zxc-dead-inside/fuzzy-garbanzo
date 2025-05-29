@@ -2,6 +2,7 @@ volumes:
   market_local_postgres_data: {}
   market_local_postgres_data_backups: {}
   market_local_redis_data: {}
+  esdata: {}
 
 services:
   django: &django
@@ -14,6 +15,7 @@ services:
       - postgres
       - redis
       - mailpit
+      - elasticsearch
     volumes:
       - .:/app:z
     env_file:
@@ -55,6 +57,7 @@ services:
       - redis
       - postgres
       - mailpit
+      - elasticsearch
     ports: []
     command: /start-celeryworker
 
@@ -66,6 +69,7 @@ services:
       - redis
       - postgres
       - mailpit
+      - elasticsearch
     ports: []
     command: /start-celerybeat
 
@@ -76,3 +80,20 @@ services:
     ports:
       - '5555:5555'
     command: /start-flower
+
+  elasticsearch:
+    image: docker.io/elasticsearch:7.17.13
+    container_name: market_local_elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9200" ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
