@@ -4,23 +4,7 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
 from market.catalog.managers import ProductManager
-
-
-class TimeStampedMixin(models.Model):
-    """Add timestamps to the model"""
-    created_at = models.DateTimeField('Created at', auto_now_add=True)
-    updated_at = models.DateTimeField('Updated at', auto_now=True)
-
-    class Meta:
-        abstract = True
-
-
-class ActivatableMixin(models.Model):
-    """Add a boolean field to indicate if the object is active"""
-    is_active = models.BooleanField('Active', default=True)
-
-    class Meta:
-        abstract = True
+from market.common.models import TimeStampedMixin, ActivatableMixin
 
 
 class Category(TimeStampedMixin, ActivatableMixin, models.Model):

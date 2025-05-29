@@ -1,9 +1,10 @@
 from django.db import models
 
 from market.catalog.models import Product
+from market.common.models import TimeStampedMixin
 
 
-class Order(models.Model):
+class Order(TimeStampedMixin, models.Model):
     STATUS_CHOICES = [
         ('draft', 'Draft'),
         ('confirmed', 'Confirmed'),
@@ -14,8 +15,6 @@ class Order(models.Model):
 
     status = models.CharField('Status', max_length=20,
                               choices=STATUS_CHOICES, default='draft')
-    created_at = models.DateTimeField('Created', auto_now_add=True)
-    updated_at = models.DateTimeField('Updated', auto_now=True)
     is_finalized = models.BooleanField('Finished', default=False)
 
     class Meta:
