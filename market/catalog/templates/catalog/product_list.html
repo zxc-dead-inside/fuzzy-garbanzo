@@ -2,7 +2,10 @@
 
 {% block content %}
 <h1>{{ title }}</h1>
-
+<form method="get" action="">
+  <input type="text" name="q" placeholder="Search products..." value="{{ query }}">
+  <button type="submit">Search</button>
+</form>
 {% if products %}
   <ul class="product-list">
     {% for product in products %}
@@ -22,18 +25,19 @@
   {% if is_paginated %}
     <div class="pagination">
       {% if page_obj.has_previous %}
-        <a href="?page=1">Первая</a>
-        <a href="?page={{ page_obj.previous_page_number }}">←</a>
+        <a href="?{% if query %}q={{ query }}&{% endif %}page=1">Первая</a>
+        <a href="?{% if query %}q={{ query }}&{% endif %}page={{ page_obj.previous_page_number }}">←</a>
       {% endif %}
 
       <span>Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
 
       {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}">→</a>
-        <a href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
+        <a href="?{% if query %}q={{ query }}&{% endif %}page={{ page_obj.next_page_number }}">→</a>
+        <a href="?{% if query %}q={{ query }}&{% endif %}page={{ page_obj.paginator.num_pages }}">Последняя</a>
       {% endif %}
     </div>
   {% endif %}
+
 {% else %}
   <p>Нет товаров для отображения.</p>
 {% endif %}

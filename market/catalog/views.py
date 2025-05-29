@@ -1,7 +1,9 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
+from elasticsearch.dsl.query import MultiMatch
 
+from .documents import ProductDocument
 from .models import Category, Product
 
 
@@ -88,19 +90,31 @@ def category_json_detail(request, category_id):
 
 
 class ProductListView(ListView):
-    """List of products"""
+    """List of products with optional search"""
     model = Product
     template_name = 'catalog/product_list.html'
     context_object_name = 'products'
     paginate_by = 12
 
     def get_queryset(self):
-        return Product.objects.filter(is_active=True).select_related(
-            'category')
+        query = self.request.GET.get('q')
+        if query:
+            search = ProductDocument.search().query(
+                MultiMatch(query=query, fields=['name',
+                                                'description',
+                                                'category_name'])
+            )
+            product_ids = [hit.meta.id for hit in search[:1000]]
+            return Product.objects.filter(
+                id__in=product_ids).select_related('category')
+
+        return Product.objects.filter(
+            is_active=True).select_related('category')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Products'
+        context['query'] = self.request.GET.get('q', '')
         return context
 
 

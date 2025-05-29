@@ -93,6 +93,7 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
     "imagekit",
     "django_filters",
+    "django_elasticsearch_dsl",
 ]
 
 LOCAL_APPS = [
@@ -366,3 +367,9 @@ SPECTACULAR_SETTINGS = {
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'http://elasticsearch:9200'
+    },
+}
+

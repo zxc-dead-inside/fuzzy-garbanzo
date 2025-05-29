@@ -1,10 +1,8 @@
-import pytest
 from decimal import Decimal
 
-from django.contrib.auth import get_user_model
-from rest_framework.test import APIClient
-from rest_framework import status
+import pytest
 from django.urls import reverse
+from rest_framework import status
 
 from market.catalog.models import Product, Category
 from market.orders.models import Order, OrderItem
@@ -28,16 +26,7 @@ def test_order_total_sum():
 
 
 @pytest.mark.django_db
-def test_order_list_api():
-    user = get_user_model().objects.create_user(
-        email='example@example.com',
-        password='testpass',
-    )
-    client = APIClient()
-    client.login(
-        email='example@example.com',
-        password='testpass',
-    )
+def test_order_list_api(authenticated_client):
     category = Category.objects.create(name="API Test Category")
 
     product1 = Product.objects.create(
@@ -70,7 +59,7 @@ def test_order_list_api():
     )
 
     url = reverse('api_order_list')
-    response = client.get(url)
+    response = authenticated_client.get(url)
 
     assert response.status_code == status.HTTP_200_OK
     assert len(response.data) == 2
@@ -87,16 +76,7 @@ def test_order_list_api():
 
 
 @pytest.mark.django_db
-def test_order_detail_api():
-    client = APIClient()
-    user = get_user_model().objects.create_user(
-        email='example@example.com',
-        password='testpass',
-    )
-    client.login(
-        email='example@example.com',
-        password='testpass',
-    )
+def test_order_detail_api(authenticated_client):
     category = Category.objects.create(name="Detail API Test Category")
 
     product1 = Product.objects.create(
@@ -127,7 +107,7 @@ def test_order_detail_api():
     )
 
     url = reverse('api_order_detail', kwargs={'id': order.id})
-    response = client.get(url)
+    response = authenticated_client.get(url)
 
     assert response.status_code == status.HTTP_200_OK
 

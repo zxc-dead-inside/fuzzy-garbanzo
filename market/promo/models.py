@@ -1,8 +1,9 @@
 from django.db import models
 from market.catalog.models import Product
+from market.common.models import ActivatableMixin
 
 
-class Promo(models.Model):
+class Promo(ActivatableMixin, models.Model):
     """Base class for proxy promo models."""
     PROMO_TYPE_CHOICES = [
         ('percent', 'Percentage discount'),
@@ -48,7 +49,6 @@ class Promo(models.Model):
         blank=True
     )
 
-    is_active = models.BooleanField('Active', default=True)
     start_date = models.DateField('Start date', null=True, blank=True)
     end_date = models.DateField('End date', null=True, blank=True)
     created_at = models.DateTimeField('Created at', auto_now_add=True)
