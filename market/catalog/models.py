@@ -39,7 +39,6 @@ class Category(TimeStampedMixin, ActivatableMixin, models.Model):
     image = models.ImageField('Image', upload_to='categories/', blank=True)
     sort_order = models.PositiveIntegerField('Sort order', default=0)
 
-
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
