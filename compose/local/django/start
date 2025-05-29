@@ -6,4 +6,12 @@ set -o nounset
 
 
 python manage.py migrate
+
+# fixtures download
+python manage.py loaddata catalog_test_data
+python manage.py loaddata product_test_data
+
+# SQLite import (not used)
+python manage.py import_products_from_sql --dry-run || true
+
 exec uvicorn config.asgi:application --host 0.0.0.0 --reload --reload-include '*.html'
