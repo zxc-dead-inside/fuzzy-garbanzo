@@ -1,4 +1,4 @@
-       from django_elasticsearch_dsl import Document, fields, Index
+from django_elasticsearch_dsl import Document, fields, Index
 from django_elasticsearch_dsl.registries import registry
 from market.catalog.models import Product
 
