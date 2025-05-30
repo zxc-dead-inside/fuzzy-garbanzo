@@ -326,9 +326,6 @@ tags
 # Redis dump file
 dump.rdb
 
-### Project template
-market/media/
-
 .pytest_cache/
 .ipython/
 .env
