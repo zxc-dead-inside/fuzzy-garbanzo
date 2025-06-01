@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
-from elasticsearch.dsl.query import MultiMatch
+from elasticsearch.dsl.query import MultiMatch, Q
 
 from .documents import ProductDocument
 from .models import Category, Product
@@ -100,9 +100,13 @@ class ProductListView(ListView):
         query = self.request.GET.get('q')
         if query:
             search = ProductDocument.search().query(
-                MultiMatch(query=query, fields=['name',
-                                                'description',
-                                                'category_name'])
+                Q("multi_match", query=query, fields=[
+                    "name^3",
+                    "name.autocomplete^5",
+                    "description",
+                    "description.autocomplete",
+                    "category_name"
+                ], type="best_fields")
             )
             product_ids = [hit.meta.id for hit in search[:1000]]
             return Product.objects.filter(
