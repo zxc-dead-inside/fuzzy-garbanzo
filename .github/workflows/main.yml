@@ -35,6 +35,7 @@ jobs:
         run: |
           if [ ! -f "mypy.ini" ]; then
             echo -e "[mypy]\nplugins =\n    mypy_django_plugin.main\n\n[mypy.plugins.django-stubs]\ndjango_settings_module = \"config.settings\"" > mypy.ini
+          fi
           mypy --install-types --non-interactive .
           mypy . --html-report mypy-report || true
           if [ ! -f "mypy-report/index.html" ]; then
