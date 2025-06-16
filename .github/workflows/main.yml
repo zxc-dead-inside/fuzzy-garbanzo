@@ -19,7 +19,7 @@ jobs:
 
       - name: Install tools
         run: |
-          pip install wemake-python-styleguide flake8-html mypy mypy-django-plugin
+          pip install wemake-python-styleguide flake8-html mypy django-stubs[compatible-mypy]
 
       - name: Create reports directory
         run: mkdir -p flake8-report
@@ -33,6 +33,8 @@ jobs:
 
       - name: Run type checking with mypy
         run: |
+          if [ ! -f "mypy.ini" ]; then
+            echo -e "[mypy]\nplugins =\n    mypy_django_plugin.main\n\n[mypy.plugins.django-stubs]\ndjango_settings_module = \"config.settings\"" > mypy.ini
           mypy --install-types --non-interactive .
           mypy . --html-report mypy-report || true
           if [ ! -f "mypy-report/index.html" ]; then
