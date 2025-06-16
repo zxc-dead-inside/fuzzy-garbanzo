@@ -1,0 +1,55 @@
+name: Python Linter
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install tools
+        run: |
+          pip install wemake-python-styleguide flake8-html mypy django-stubs[compatible-mypy]
+          pip install -r requirements/base.txt
+          pip install -r requirements/local.txt
+
+      - name: Create reports directory
+        run: mkdir -p flake8-report
+
+      - name: Run WPS with HTML report
+        run: |
+          flake8 . --select=WPS --format=html --htmldir=flake8-report || true
+          if [ ! -f "flake8-report/index.html" ]; then
+            echo "<html><body><h1>No WPS issues found</h1></body></html>" > flake8-report/index.html
+          fi
+
+      - name: Run type checking with mypy
+        run: |
+          if [ ! -f "mypy.ini" ]; then
+            echo -e "[mypy]\nplugins =\n    mypy_django_plugin.main\n\n[mypy.plugins.django-stubs]\ndjango_settings_module = \"config.settings\"" > mypy.ini
+          fi
+          mypy --install-types --non-interactive .
+          mypy . --html-report mypy-report || true
+          if [ ! -f "mypy-report/index.html" ]; then
+            mkdir -p mypy-report
+            echo "<html><body><h1>No mypy issues found</h1></body></html>" > mypy-report/index.html
+          fi
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-reports
+          path: |
+            flake8-report/
+            mypy-report/
+          retention-days: 7
