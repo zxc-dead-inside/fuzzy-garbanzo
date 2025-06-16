@@ -19,7 +19,7 @@ jobs:
 
       - name: Install tools
         run: |
-          pip install wemake-python-styleguide flake8-html mypy
+          pip install wemake-python-styleguide flake8-html mypy mypy-django-plugin
 
       - name: Create reports directory
         run: mkdir -p flake8-report
