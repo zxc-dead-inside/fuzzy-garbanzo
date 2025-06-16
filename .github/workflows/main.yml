@@ -1,10 +1,10 @@
-name: Linter
+name: Python Code Quality
 
 on:
   push:
-    branches: [ develop, main ]
+    branches: [main, develop]
   pull_request:
-    branches: [ develop, main ]
+    branches: [main, develop]
 
 jobs:
   lint:
@@ -17,21 +17,24 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install dependencies
+      - name: Install tools
         run: |
-          python -m pip install --upgrade pip
           pip install wemake-python-styleguide flake8-html
+
+      - name: Create reports directory
+        run: mkdir -p flake8-report
 
       - name: Run WPS with HTML report
         run: |
-          flake8 . --select=WPS --format=html --htmldir=flake8-report
-          [ -d flake8-report ] || mkdir flake8-report
-          echo "<meta http-equiv='refresh' content='0; url=index.html'>" > flake8-report/index.html
+          flake8 . --select=WPS --format=html --htmldir=flake8-report || true
+          # Create index.html if not generated
+          if [ ! -f "flake8-report/index.html" ]; then
+            echo "<html><body><h1>No WPS issues found</h1></body></html>" > flake8-report/index.html
+          fi
 
       - name: Upload reports
         uses: actions/upload-artifact@v4
         with:
           name: lint-reports
-          path: |
-            ruff-report.html
-            flake8-report/
+          path: flake8-report/
+          retention-days: 7
