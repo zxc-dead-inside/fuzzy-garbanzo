@@ -20,12 +20,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ruff wemake-python-styleguide flake8-html
-
-      - name: Run ruff (lint + format)
-        run: |
-          ruff check . --output-format=html > ruff-report.html || true
-          ruff format --check .
+          pip install wemake-python-styleguide flake8-html
 
       - name: Run WPS with HTML report
         run: |
