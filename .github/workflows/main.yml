@@ -1,4 +1,4 @@
-name: Python Code Quality
+name: Python Linter
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
 
       - name: Install tools
         run: |
-          pip install wemake-python-styleguide flake8-html
+          pip install wemake-python-styleguide flake8-html mypy
 
       - name: Create reports directory
         run: mkdir -p flake8-report
@@ -27,14 +27,24 @@ jobs:
       - name: Run WPS with HTML report
         run: |
           flake8 . --select=WPS --format=html --htmldir=flake8-report || true
-          # Create index.html if not generated
           if [ ! -f "flake8-report/index.html" ]; then
             echo "<html><body><h1>No WPS issues found</h1></body></html>" > flake8-report/index.html
+          fi
+
+      - name: Run type checking with mypy
+        run: |
+          mypy --install-types --non-interactive .
+          mypy . --html-report mypy-report || true
+          if [ ! -f "mypy-report/index.html" ]; then
+            mkdir -p mypy-report
+            echo "<html><body><h1>No mypy issues found</h1></body></html>" > mypy-report/index.html
           fi
 
       - name: Upload reports
         uses: actions/upload-artifact@v4
         with:
           name: lint-reports
-          path: flake8-report/
+          path: |
+            flake8-report/
+            mypy-report/
           retention-days: 7
